@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/db/mongodb.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await MongoDatabase.connect();
   runApp(
     const MaterialApp(
       title: 'Proyecto',
@@ -66,7 +69,8 @@ class MyApp extends StatelessWidget {
                     aspectRatio: 16 / 9,
                     autoPlayCurve: Curves.fastOutSlowIn,
                     enableInfiniteScroll: true,
-                    autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                    autoPlayAnimationDuration:
+                        const Duration(milliseconds: 800),
                     viewportFraction: 0.8,
                   ),
                 ),
@@ -74,9 +78,6 @@ class MyApp extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             const ServicesSection(),
-
-            Container(),
-            
             Container(
               color: const Color.fromARGB(255, 226, 250, 255),
               padding: const EdgeInsets.all(20),

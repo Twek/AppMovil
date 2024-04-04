@@ -1,37 +1,31 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_application_1/db/mongodb.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart'; // Importación del paquete Flutter
+import 'package:url_launcher/url_launcher.dart'; // Importación del paquete para lanzar URL
+import 'package:carousel_slider/carousel_slider.dart'; // Importación del paquete para el carrusel
 
+// Función principal para ejecutar la aplicación
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await MongoDatabase.connect();
   runApp(
     const MaterialApp(
-      title: 'Proyecto',
-      home: MyApp(),
+      title: 'Proyecto', // Título de la aplicación
+      home: MyApp(), // Widget principal de la aplicación
     ),
   );
 }
 
+// Widget principal de la aplicación
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const IconButton(
-          icon: Icon(Icons.menu),
-          tooltip: 'Opciones',
-          onPressed: null,
-        ),
         title: const Text(
-          'Taller MJ',
+          'Taller MJ', // Título de la aplicación
           style: TextStyle(
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.bold, // Estilo del texto
           ),
-          textAlign: TextAlign.center,
+          textAlign: TextAlign.center, // Alineación del texto
         ),
       ),
       body: SingleChildScrollView(
@@ -41,27 +35,31 @@ class MyApp extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 20),
+                const SizedBox(height: 20), // Espacio en blanco
                 const Image(
-                  image: AssetImage('assets/Fondo.jpeg'),
+                  image: AssetImage(
+                      'assets/Fondo.jpeg'), // Imagen de fondo de motocicleta
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 20), // Espacio en blanco
                 const Text(
                   'Empresa especializada en las motocicletas\n'
                   'tanto la parte de mantenimiento y reparación\n'
-                  'como el área de venta de repuestos y accesorios.\n',
+                  'como el área de venta de repuestos y accesorios.\n', // Texto descriptivo
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 15, // Tamaño del texto
                   ),
-                  textAlign: TextAlign.center,
+                  textAlign: TextAlign.center, // Alineación del texto
                 ),
                 const SizedBox(height: 20),
+                // Espacio en blanco
                 CarouselSlider(
+                  // Carrusel de imágenes
                   items: [
-                    Image.asset('assets/img1.jpeg'),
-                    Image.asset('assets/img2.jpeg'),
-                    Image.asset('assets/img3.jpeg'),
+                    Image.asset('assets/img1.jpeg'), // Imagen de sedes
+                    Image.asset('assets/img2.jpeg'), // Imagen de sedes
+                    Image.asset('assets/img3.jpeg'), // Imagen de sedes
                   ],
+                  //detalles sobre la configuracion del tiempo y etc
                   options: CarouselOptions(
                     height: 200,
                     enlargeCenterPage: true,
@@ -76,8 +74,9 @@ class MyApp extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
-            const ServicesSection(),
+            const SizedBox(height: 20), // Espacio en blanco
+            const ServicesSection(), // Sección de servicios
+            // Sección de proveedores
             Container(
               color: const Color.fromARGB(255, 226, 250, 255),
               padding: const EdgeInsets.all(20),
@@ -90,7 +89,7 @@ class MyApp extends StatelessWidget {
                         Container(
                           alignment: Alignment.center,
                           child: const Text(
-                            'NUESTROS PROVEEDORES',
+                            'NUESTROS PROVEEDORES', // Título de la sección
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -98,27 +97,32 @@ class MyApp extends StatelessWidget {
                             textAlign: TextAlign.center,
                           ),
                         ),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 10), // Espacio en blanco
                         const Text(
-                          'Estos proveedores son fundamentales para asegurar que el taller tenga acceso a los recursos necesarios para llevar a cabo las reparaciones y el mantenimiento de las motocicletas de manera eficiente.',
+                          'Estos proveedores son fundamentales para asegurar que el taller tenga acceso a los recursos necesarios para llevar a cabo las reparaciones y el mantenimiento de las motocicletas de manera eficiente.', // Descripción de los proveedores
                           style: TextStyle(
                             fontSize: 16,
                           ),
                           textAlign: TextAlign.left,
                         ),
-                        const SizedBox(height: 20),
+
+                        const SizedBox(height: 20), // Espacio en blanco
                         ElevatedButton(
                           onPressed: () {
                             // Abre un diálogo con las imágenes de proveedores
                             showDialog(
                               context: context,
                               builder: (BuildContext context) => AlertDialog(
-                                title: const Text('Imágenes de proveedores'),
+                                title: const Text(
+                                    'Nuestros proveedores:'), // Título del diálogo
                                 content: Column(
                                   children: [
-                                    Image.asset('assets/honda.png'),
-                                    Image.asset('assets/Auteco.png'),
-                                    Image.asset('assets/BAJAB.png'),
+                                    Image.asset(
+                                        'assets/honda.png'), // Imagen de proveedor 1
+                                    Image.asset(
+                                        'assets/Auteco.png'), // Imagen de proveedor 2
+                                    Image.asset(
+                                        'assets/BAJAB.png'), // Imagen de proveedor 3
                                   ],
                                 ),
                                 actions: [
@@ -126,17 +130,20 @@ class MyApp extends StatelessWidget {
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
-                                    child: const Text('Cerrar'),
+                                    child: const Text(
+                                        'Cerrar'), // Botón para cerrar el diálogo
                                   ),
                                 ],
                               ),
                             );
                           },
+                          //color del fondo y texto del boton de proveedores
                           style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.white,
                             backgroundColor: Colors.orange,
                           ),
-                          child: const Text('Ver proveedores'),
+                          child:
+                              const Text('Ver proveedores'), // Texto del botón
                         ),
                       ],
                     ),
@@ -146,7 +153,7 @@ class MyApp extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(50),
                     child: Image.asset(
-                      'assets/proveedores.png',
+                      'assets/proveedores.png', // Imagen de los señores hablando a la derecha de la informacion
                       width: 100,
                       height: 100,
                     ),
@@ -154,6 +161,7 @@ class MyApp extends StatelessWidget {
                 ],
               ),
             ),
+            // Sección de Peticiones, Quejas o Reclamos (PQR)
             Container(
               color: Colors.white, // Fondo blanco
               padding: const EdgeInsets.all(20),
@@ -161,7 +169,7 @@ class MyApp extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Text(
-                    'PETICIONES, QUEJAS O RECLAMOS (PQR)',
+                    'PETICIONES, QUEJAS O RECLAMOS (PQR)', // Título de la sección
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -169,9 +177,9 @@ class MyApp extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 10), // Espacio en blanco
                   const Text(
-                    '¿Tiene alguna solicitud, queja o reclamo? Le invitamos a escanear el código o hacer clic en el enlace, para compartirlo con nosotros.',
+                    '¿Tiene alguna solicitud, queja o reclamo? Le invitamos a escanear el código o hacer clic en el enlace, para compartirlo con nosotros.', // Descripción
                     style: TextStyle(
                       fontSize: 16,
                       color:
@@ -179,19 +187,19 @@ class MyApp extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 10), // Espacio en blanco
                   Image.asset(
-                    'assets/pqr.png', // Ruta de la imagen
+                    'assets/pqr.png', // Imagen del código QR
                     width: 100, // Ancho de la imagen
                     height: 100, // Alto de la imagen
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 10), // Espacio en blanco
                   GestureDetector(
                     onTap: () {
-                      // Aquí puedes manejar la acción cuando se hace clic en el texto
+                      // Abre el enlace en el navegador cuando se hace clic
                       // ignore: deprecated_member_use
                       launch(
-                          'https://forms.gle/xkbWyBdDbSQwBZz7A'); // Abre el enlace en el navegador
+                          'https://forms.gle/xkbWyBdDbSQwBZz7A'); // Enlace para las PQR
                     },
                     child: const Text(
                       'Haz clic aquí', // Texto del enlace
@@ -207,6 +215,7 @@ class MyApp extends StatelessWidget {
                 ],
               ),
             ),
+            // Sección del pie de página
             Container(
               color: Colors.grey[800], // Color gris oscuro
               padding: const EdgeInsets.all(20),
@@ -214,7 +223,7 @@ class MyApp extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'MOTOS Y SERVICIOS DEL SUR JM',
+                    'MOTOS Y SERVICIOS DEL SUR JM', // Título del pie de página
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -225,7 +234,7 @@ class MyApp extends StatelessWidget {
                   SizedBox(height: 10),
                   Text(
                     '© 2023 Todos los derechos reservados | Taller JM\n'
-                    'NIT 1098308671 | Car.14 # 68B 93 SUR | Bogotá, Colombia',
+                    'NIT 1098308671 | Car.14 # 68B 93 SUR | Bogotá, Colombia', // Información del taller
                     style: TextStyle(
                       fontSize: 16,
                       color: Color.fromARGB(255, 241, 253, 255), // Texto blanco
@@ -235,13 +244,7 @@ class MyApp extends StatelessWidget {
                   SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.facebook,
-                        color: Colors.orange,
-                        size: 40,
-                      ),
-                    ],
+                    children: [],
                   ),
                 ],
               ),
@@ -253,15 +256,16 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// Widget para cada opción de servicio
 class ServiceOption extends StatelessWidget {
-  final String title;
-  final String description;
+  final String title; // Título del servicio
+  final String description; // Descripción del servicio
 
   const ServiceOption({
     required this.title,
     required this.description,
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -269,37 +273,38 @@ class ServiceOption extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          title,
+          title, // Título del servicio
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 5),
+        const SizedBox(height: 5), // Espacio en blanco
         Text(
-          description,
+          description, // Descripción del servicio
           style: const TextStyle(
             fontSize: 14,
           ),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 10), // Espacio en blanco
       ],
     );
   }
 }
 
+// Widget para la sección de servicios
 class ServicesSection extends StatefulWidget {
-  const ServicesSection({super.key});
+  const ServicesSection({Key? key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _ServicesSectionState createState() => _ServicesSectionState();
 }
 
+// Estado para la sección de servicios
 class _ServicesSectionState extends State<ServicesSection> {
-  bool _showServices = false;
+  bool _showServices = false; // Estado para mostrar u ocultar los servicios
 
   @override
   Widget build(BuildContext context) {
@@ -309,14 +314,14 @@ class _ServicesSectionState extends State<ServicesSection> {
         InkWell(
           onTap: () {
             setState(() {
-              _showServices = !_showServices;
+              _showServices = !_showServices; // Cambia el estado al hacer clic
             });
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'Servicios',
+                'Servicios', // Título de la sección
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -324,7 +329,10 @@ class _ServicesSectionState extends State<ServicesSection> {
                 textAlign: TextAlign.center,
               ),
               Icon(
-                _showServices ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+                _showServices
+                    ? Icons.arrow_drop_up
+                    : Icons
+                        .arrow_drop_down, // Icono de flecha hacia arriba o hacia abajo
                 size: 30,
               ),
             ],
@@ -337,24 +345,24 @@ class _ServicesSectionState extends State<ServicesSection> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ServiceOption(
-                  title: 'Reparaciones Mecánicas',
+                  title: 'Reparaciones Mecánicas', // Título del servicio
                   description:
-                      'Nos encargamos de reparación o reemplazo de piezas defectuosas a desgastadas, ajustes de motor, reparación de sistemas de transmisión, reparación de sistemas de escape, reparación de sistemas de suspensión, y solución de problemas eléctricas',
+                      'Nos encargamos de reparación o reemplazo de piezas defectuosas a desgastadas, ajustes de motor, reparación de sistemas de transmisión, reparación de sistemas de escape, reparación de sistemas de suspensión, y solución de problemas eléctricas', // Descripción del servicio
                 ),
                 ServiceOption(
-                  title: 'Mantenimiento Programado',
+                  title: 'Mantenimiento Programado', // Título del servicio
                   description:
-                      'Nos encargamos de cambios de aceite, cambios de filtros de aire y de aceite, ajustes de la cadena de transmisión, ajustes de válvulas, limpieza de carburadores o inyectores, y revisión general del sistema de frenos',
+                      'Nos encargamos de cambios de aceite, cambios de filtros de aire y de aceite, ajustes de la cadena de transmisión, ajustes de válvulas, limpieza de carburadores o inyectores, y revisión general del sistema de frenos', // Descripción del servicio
                 ),
                 ServiceOption(
-                  title: 'Servicio de Diagnóstico',
+                  title: 'Servicio de Diagnóstico', // Título del servicio
                   description:
-                      'Nos encargamos de identificar una falla en específico o situaciones anormales donde elaboramos mediante procedimientos adecuados en los cuales plasmamos todos nuestros conocimientos como especialistas en mecánica.',
+                      'Nos encargamos de identificar una falla en específico o situaciones anormales donde elaboramos mediante procedimientos adecuados en los cuales plasmamos todos nuestros conocimientos como especialistas en mecánica.', // Descripción del servicio
                 ),
               ],
             ),
           ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 20), // Espacio en blanco
       ],
     );
   }
